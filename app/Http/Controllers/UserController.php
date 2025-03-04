@@ -10,7 +10,16 @@ class UserController extends Controller
 {   
     public function index() 
     {
-        $user = UserModel::findOr(20,['username', 'nama'], function () {abort(404);});
-        return view('user', ['data' => $user]);
+        $user = UserModel::firstOrCreate(
+            [
+            'username' => 'manager33',
+            'nama' => 'Manager Tiga Tiga',
+            'password'=> Hash::make('1234'),
+            'level_id'=>2
+        ],
+    );
+    $user->save();
+    
+    return view('user', ['data' => $user]);
     }
 }
